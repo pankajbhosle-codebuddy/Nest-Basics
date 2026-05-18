@@ -56,7 +56,7 @@ export class BooksService {
     dto: CreateBookDto,
     author: JwtPayload,
   ): Promise<ApiResponseDto<BookResponseDto>> {
-    const book = await this.prisma.books.create({
+    const book = await this.prisma.book.create({
       data: {
         title: dto.title,
         description: dto.description,
@@ -113,7 +113,7 @@ export class BooksService {
   }
 
   async getBookById(id: string): Promise<ApiResponseDto<BookResponseDto>> {
-    const book = await this.prisma.books.findUnique({
+    const book = await this.prisma.book.findUnique({
       where: {
         id,
       },
@@ -129,10 +129,6 @@ export class BooksService {
           select: {
             id: true,
             username: true,
-            password: true,
-            v: true,
-            createdAt: true,
-            updatedAt: true,
 
             _count: {
               select: {
@@ -146,10 +142,6 @@ export class BooksService {
           select: {
             id: true,
             name: true,
-            v: true,
-            createdAt: true,
-            updatedAt: true,
-            bookIds: true,
 
             _count: {
               select: {
@@ -169,7 +161,7 @@ export class BooksService {
   }
 
   async deleteBookById(id: string): Promise<ApiResponseDto<{ id: string }>> {
-    const book = await this.prisma.books.findUnique({
+    const book = await this.prisma.book.findUnique({
       where: {
         id,
       },
@@ -179,7 +171,7 @@ export class BooksService {
       throw new NotFoundException('Book not found');
     }
 
-    await this.prisma.books.delete({
+    await this.prisma.book.delete({
       where: {
         id,
       },

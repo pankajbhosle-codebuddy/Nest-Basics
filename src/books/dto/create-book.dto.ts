@@ -1,4 +1,10 @@
-import { IsArray, IsNotEmpty, IsString, ArrayNotEmpty } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsString,
+  ArrayNotEmpty,
+  IsMongoId,
+} from 'class-validator';
 
 export class CreateBookDto {
   @IsString()
@@ -11,5 +17,6 @@ export class CreateBookDto {
 
   @IsArray()
   @ArrayNotEmpty()
+  @IsMongoId({ each: true })
   genreIds!: string[];
 }

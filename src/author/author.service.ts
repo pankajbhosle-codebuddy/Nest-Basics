@@ -31,7 +31,7 @@ export class AuthorService {
       );
     }
 
-    const author = await this.prisma.authors.findUnique({
+    const author = await this.prisma.author.findUnique({
       where: {
         id: authorId,
       },

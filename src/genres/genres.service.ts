@@ -30,7 +30,7 @@ export class GenresService {
     dto: CreateGenreDto,
   ): Promise<ApiResponseDto<GenreResponseDto>> {
     if (
-      await this.prisma.genres.findUnique({
+      await this.prisma.genre.findUnique({
         where: {
           name: dto.name,
         },
@@ -39,7 +39,7 @@ export class GenresService {
       throw new BadRequestException('Genre already exists');
     }
 
-    const genre = await this.prisma.genres.create({
+    const genre = await this.prisma.genre.create({
       data: {
         name: dto.name,
       },
@@ -64,7 +64,7 @@ export class GenresService {
       );
     }
 
-    const genre = await this.prisma.genres.findUnique({
+    const genre = await this.prisma.genre.findUnique({
       where: {
         id: genreId,
       },
