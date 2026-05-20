@@ -23,7 +23,7 @@ export class AuthService {
   ) {}
 
   async register(dto: RegisterDto): Promise<ApiResponseDto<{ id: string }>> {
-    const existingAuthor = await this.prisma.authors.findFirst({
+    const existingAuthor = await this.prisma.author.findFirst({
       where: {
         username: dto.username,
       },
@@ -35,7 +35,7 @@ export class AuthService {
 
     const hashedPassword = await hashPassword(dto.password);
 
-    const author = await this.prisma.authors.create({
+    const author = await this.prisma.author.create({
       data: {
         username: dto.username,
         password: hashedPassword,
@@ -51,7 +51,7 @@ export class AuthService {
   async login(
     dto: LoginDto,
   ): Promise<ApiResponseDto<{ access_token: string }>> {
-    const author = await this.prisma.authors.findFirst({
+    const author = await this.prisma.author.findFirst({
       where: {
         username: dto.username,
       },
